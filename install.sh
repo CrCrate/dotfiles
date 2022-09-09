@@ -2,6 +2,8 @@
 
 echo RUN AS ROOT
 echo script assumes youre running archinstall arch with desktop i3-gaps profile
+echo INSIDE cloned dotfiles repo folder
+echo
 echo starting install
 
 echo installing utils
@@ -31,8 +33,8 @@ echo installing steam
 pacman -S --noconfirm steam
 
 echo installing configs
-git clone https://github.com/crcrate/dotfiles
-cd dotfiles
+#git clone https://github.com/crcrate/dotfiles
+#cd dotfiles
 # theres probably a better way to select all folders than specifying each one
 rsync --remove-source-files dunst gtk-3.0 i3 kitty polybar rofi /home/$USER/.config
 mv .zshrc /home/$USER/.zshrc
