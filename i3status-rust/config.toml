@@ -1,0 +1,127 @@
+[theme]
+theme = "semi-native"
+[theme.overrides]
+good_fg = "#93a1a1"
+
+[icons]
+icons = "awesome5"
+
+[icons.overrides]
+cpu = "﬙"
+memory_mem = ""
+# זּ ﬙ 
+cogs = "猪"
+backlight_empty = ""
+backlight_1 = ""
+backlight_2 = ""
+backlight_3 = ""
+backlight_4 = ""
+backlight_5 = ""
+backlight_6 = ""
+backlight_7 = ""
+backlight_8 = ""
+backlight_9 = ""
+backlight_10 = ""
+backlight_11 = ""
+backlight_12 = ""
+backlight_13 = ""
+backlight_full = ""
+
+#[[block]]
+# primary
+#block = "custom"
+#command = "echo -ne '󿩚';~/.config/i3/scripts/blocks/clipboard --primary"
+#interval = 2
+
+#[[block]]
+# clipboard
+#block = "custom"
+#command = "echo -ne '󿚑'; ~/.config/i3/scripts/blocks/clipboard --clipboard"
+#interval = 2
+
+
+[[block]]
+block = "custom"
+command = '''echo -ne '  '; echo "$(cat /sys/class/power_supply/*/capacity | awk '{print $1 "%"}')" '''
+interval = 10
+
+[[block]]
+block = "disk_space"
+path = "/"
+#alias = "/"
+info_type = "available"
+alert_unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+format = " $icon $available "
+
+[[block]]
+block = "memory"
+#display_type = "memory"
+format = " $icon $mem_used/$mem_total "
+#format_swap = "{swap_used_percents}"
+
+[[block]]
+block = "custom"
+command = '''echo -ne '  '; echo "$(cat /sys/class/drm/card*/device/gpu_busy_percent | awk '{print $1 "%"}')" "$(sed 's/...$//' /sys/class/drm/card*/device/hwmon/*/temp2_input | awk '{print $1 "°C"}')" '''
+interval = 5
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "load"
+interval = 1
+format = " $icon $1m "
+
+[[block]]
+block = "net"
+device = "enp7s0"
+format = " $ip $speed_up.eng(prefix:K) $speed_down.eng(prefix:K) "
+interval = 5
+
+# [[block]]
+# block = "networkmanager"
+# on_click = "alacritty -e nmtui"
+# interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
+# interface_name_include = []
+#[[block]]
+#block = "backlight"
+#invert_icons = false
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+#on_click = "~/.config/i3/scripts/set-default-sound-device.sh"
+#on_click = "/bin/pavucontrol"
+[[block.click]]
+button = 'left'
+cmd = '/bin/pavucontrol'
+
+#[[block]]
+#block = "battery"
+#interval = 10
+#format = "{percentage} {time}"
+
+#[[block]]
+#block = "notify"
+
+[[block]]
+block = "pacman"
+interval = 3600
+format = "{pacman} + {aur} = {both} updates available"
+format_singular = "{both} update available"
+format_up_to_date = ""
+
+critical_updates_regex = "(linux|linux-lts|linux-zen)"
+aur_command = "yay -Qua"
+
+#[[block]]
+#block = "uptime"
+
+[[block]]
+block = "time"
+interval = 1
+format = " $icon $timestamp.datetime(f:'%Y-%m-%d %H:%M:%S (%a)')"
